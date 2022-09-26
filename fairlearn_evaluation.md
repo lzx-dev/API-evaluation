@@ -107,8 +107,13 @@ The underlying metric functions which are to be calculated. This can either be a
 
 #### 3.2.2 Metric Frame visualization
 ```python
-
-
+metric_frame.by_group.plot.bar(
+    subplots=True,
+    layout=[3, 3],
+    legend=False,
+    figsize=[12, 8],
+    title="Show all metrics",
+)
 ```
 #### 3.3 Using existing metric definitions from scikit-learn
 ```python
@@ -122,3 +127,6 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
 ```
 
  ## 4 Mitigation
+ 
+ 
+ 
