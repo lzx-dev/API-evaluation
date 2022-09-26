@@ -127,6 +127,12 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
 ```
 
  ## 4 Mitigation
- 
- 
+ #### 4.1 Reduction
+ In this approach, disparity constraints are cast as Lagrange multipliers, which cause the reweighting and relabelling of the input data. This reduces the problem back to standard machine learning training.
+ ```python
+ from fairlearn.reductions import DemographicParity
+ dp = DemographicParity(difference_bound=number1, ratio_bound=number2, ratio_bound_slack=number3)
+ dp.load_data(X, y_true, sensitive_features=sensitive_features)
+ dp.gamma(lambda X: y_pred)
+ ```
  
