@@ -48,6 +48,8 @@ descr = data.DESCR
 # If return_X_y is True, returns (data.data, data.target) instead of a Bunch object.
 data_2 = fetch_adult(as_frame=True, return_X_y=True)
 x, y = data_2
+
+## if as_frame is False, return type change from pandas.DataFrame to numpy.ndarray
 ```
 Output for data.DESCR
 ```**Author**: Ronny Kohavi and Barry Becker  
