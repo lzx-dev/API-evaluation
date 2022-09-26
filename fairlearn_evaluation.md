@@ -78,3 +78,32 @@ Downloaded from openml.org.
 ## 3 Mitigation
 
 ## 4 Metrics
+#### 4.1 MetricFrame
+```python
+from fairlearn.metrics import MetricFrame
+from fiarlearn.metrics import selection_rate, count
+from sklearn import metrics as skm
+
+# sensitive_features: All names (whether on pandas objects or dictionary keys) must be strings
+# y can be (List, pandas.Series, numpy.ndarray, pandas.DataFrame)
+metric_frame = MetricFrame(metrics={"accuracy": skm.accuracy_score,
+                                    "selection_rate": selection_rate,
+                                    "count": count},
+                           sensitive_features=A_test,
+                           y_true=Y_true,
+                           y_pred=y_pred )
+```
+
+#### 4.2 Fairlearn metric
+
+####  Using existing metric definitions from scikit-learn
+```python
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+classifier = DecisionTreeClassifier(min_samples_leaf=10, max_depth=4)
+classifier.fit(X, y_true)
+y_pred = classifier.predict(X)
+mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features= sens_attr_name)
+mf.overall
+mf.by_group
+```
