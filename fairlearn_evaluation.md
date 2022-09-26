@@ -75,28 +75,42 @@ e-mail: ronnyk '@' live.com for questions.
 Downloaded from openml.org.
 ``` 
 
-## 3 Mitigation
+## 3 Metrics
+#### 3.1 Fairlearn metric
+```python
+from fairlearn.metrics import (selection_rate, demographic_parity_difference, demographic_parity_ratio,
+                              false_positive_rate, false_negative_rate,
+                              false_positive_rate_difference, false_negative_rate_difference,
+                               equalized_odds_difference)
+# sensitive_features: List, pandas.Series, dict of 1d arrays, numpy.ndarray, pandas.DataFrame
+# y can be (List, pandas.Series, numpy.ndarray, pandas.DataFrame)
+demographic_parity_ratio(y_true, y_pred, sensitive_features = X_test["sens_attr_name"])
+```
 
-## 4 Metrics
-#### 4.1 MetricFrame
+
+#### 3.2.1 MetricFrame
 ```python
 from fairlearn.metrics import MetricFrame
 from fiarlearn.metrics import selection_rate, count
-from sklearn import metrics as skm
 
-# sensitive_features: All names (whether on pandas objects or dictionary keys) must be strings
-# y can be (List, pandas.Series, numpy.ndarray, pandas.DataFrame)
-metric_frame = MetricFrame(metrics={"accuracy": skm.accuracy_score,
-                                    "selection_rate": selection_rate,
+metric_frame = MetricFrame(metrics={"selection_rate": selection_rate,
                                     "count": count},
-                           sensitive_features=A_test,
+                           sensitive_features = x_test["ensitive_features_name"],
                            y_true=Y_true,
-                           y_pred=y_pred )
+                           y_pred=y_pred)
+                           
+mf.overall
+mf.by_group
 ```
+Note: metrics (callable or dict): <br>
+The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
 
-#### 4.2 Fairlearn metric
+#### 3.2.2 Metric Frame visualization
+```python
 
-####  Using existing metric definitions from scikit-learn
+
+```
+#### 3.3 Using existing metric definitions from scikit-learn
 ```python
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
@@ -104,6 +118,7 @@ classifier = DecisionTreeClassifier(min_samples_leaf=10, max_depth=4)
 classifier.fit(X, y_true)
 y_pred = classifier.predict(X)
 mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features= sens_attr_name)
-mf.overall
-mf.by_group
+
 ```
+
+ ## 4 Mitigation
