@@ -85,6 +85,7 @@ from fairlearn.metrics import (selection_rate, demographic_parity_difference, de
 # sensitive_features: List, pandas.Series, dict of 1d arrays, numpy.ndarray, pandas.DataFrame
 # y can be (List, pandas.Series, numpy.ndarray, pandas.DataFrame)
 demographic_parity_ratio(y_true, y_pred, sensitive_features = X_test["sens_attr_name"])
+selection_rate(y_true=y_true, y_pred=y_pred)
 ```
 
 
@@ -93,6 +94,8 @@ demographic_parity_ratio(y_true, y_pred, sensitive_features = X_test["sens_attr_
 from fairlearn.metrics import MetricFrame
 from fiarlearn.metrics import selection_rate, count
 
+## selection rate: Calculate the fraction of predicted labels matching the ‘good’ outcome.
+## pos_label=1 by dafault
 metric_frame = MetricFrame(metrics={"selection_rate": selection_rate,
                                     "count": count},
                            sensitive_features = x_test["ensitive_features_name"],
@@ -106,7 +109,10 @@ Note: metrics (callable or dict): <br>
 The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
 
 #### 3.2.2 Metric Frame visualization
+The simplest way to visualize grouped metrics from the MetricFrame is to take advantage of the inherent plotting capabilities of pandas.DataFrame:
 ```python
+## by group: Return the collection of metrics evaluated for each subgroup in dataframe format
+
 metric_frame.by_group.plot.bar(
     subplots=True,
     layout=[3, 3],
