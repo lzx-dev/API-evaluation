@@ -133,7 +133,25 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
 ```
 
  ## 4 Mitigation
- #### 4.1 Reduction
+ 
+ #### 4.1 pre-processing
+ ```python
+from fairlearn.preprocessing import CorrelationRemover
+#Bases: sklearn.base.BaseEstimator, sklearn.base.TransformerMixin
+
+#A component that filters out sensitive correlations in a dataset
+cr = CorrelationRemover( sensitive_feature_ids = ["attr_name"])
+cf.fit(X)
+cf.transform(X)
+ ```
+ 
+ #### 4.2 post-processing
+The predictor’s output is adjusted to fulfill specified parity constraints. The postprocessors learn how to adjust the predictor’s output from the training data.
+ ```python
+ 
+ ```
+ 
+ #### 4.3 Reduction
  In this approach, disparity constraints are cast as Lagrange multipliers, which cause the reweighting and relabelling of the input data. This reduces the problem back to standard machine learning training.
  ```python
  from fairlearn.reductions import DemographicParity
@@ -142,3 +160,4 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
  dp.gamma(lambda X: y_pred)
  ```
  
+## Functions in other version
