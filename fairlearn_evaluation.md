@@ -135,6 +135,7 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
  ## 4 Mitigation
  
  #### 4.1 pre-processing
+CorrelationRemover applies a linear transformation to the non-sensitive feature columns in order to remove their correlation with the sensitive feature columns while retaining as much information as possible (as measured by the least-squares error).
  ```python
 from fairlearn.preprocessing import CorrelationRemover
 #Bases: sklearn.base.BaseEstimator, sklearn.base.TransformerMixin
@@ -147,8 +148,20 @@ cf.transform(X)
  
  #### 4.2 post-processing
 The predictor’s output is adjusted to fulfill specified parity constraints. The postprocessors learn how to adjust the predictor’s output from the training data.
+
+#### 4.21 ThresholdOptimizer
+The classifier is obtained by applying group-specific thresholds to the provided estimator. The thresholds are chosen to optimize the provided performance objective subject to the provided fairness constraints.
  ```python
+from fairlearn.postprocessing import ThresholdOptimizer
+#The classifier is obtained by applying group-specific thresholds to the provided estimator. The thresholds are chosen to optimize the provided #performance objective subject to the provided fairness constraints
  
+ postprocess_est = ThresholdOptimizer(
+    estimator=model,  ## A scikit-learn compatible estimator
+    constraints="equalized_odds", ## Fairness constraints under which threshold optimization is performed
+    prefit=True. ##  If True, avoid refitting the given estimator)
+ 
+ postprocess_est.fit(X_train, Y_train, sensitive_features=A_train)
+ postprocess_preds = postprocess_est.predict((X_test, sensitive_features=A_test)
  ```
  
  #### 4.3 Reduction
@@ -157,6 +170,7 @@ The predictor’s output is adjusted to fulfill specified parity constraints. Th
  from fairlearn.reductions import DemographicParity
  dp = DemographicParity(difference_bound=number1, ratio_bound=number2, ratio_bound_slack=number3)
  dp.load_data(X, y_true, sensitive_features=sensitive_features)
+ ##  Calculate the degree to which constraints are currently violated by the predictor.
  dp.gamma(lambda X: y_pred)
  ```
  
