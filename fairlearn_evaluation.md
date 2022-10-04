@@ -128,7 +128,7 @@ from sklearn.tree import DecisionTreeClassifier
 classifier = DecisionTreeClassifier(min_samples_leaf=10, max_depth=4)
 classifier.fit(X, y_true)
 y_pred = classifier.predict(X)
-mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features= sens_attr_name)
+mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features= x_test["ensitive_features_name"])
 
 ```
 
@@ -174,4 +174,10 @@ from fairlearn.postprocessing import ThresholdOptimizer
  dp.gamma(lambda X: y_pred)
  ```
  
-## Functions in other version
+## 5 Functions in other version
+#### 5.1 Dashboard
+```python
+pip install fairlearn==0.6.2
+from fairlearn.widget import FairlearnDashboard
+```
+
