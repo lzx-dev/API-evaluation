@@ -89,7 +89,7 @@ selection_rate(y_true=y_true, y_pred=y_pred)
 ```
 
 
-#### 3.2.1 MetricFrame
+#### 3.2 MetricFrame
 ```python
 from fairlearn.metrics import MetricFrame
 from fiarlearn.metrics import selection_rate, count
@@ -108,7 +108,7 @@ mf.by_group
 Note: metrics (callable or dict): <br>
 The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
 
-#### 3.2.2 Metric Frame visualization
+#### 3.2.1 Metric Frame Visualization
 The simplest way to visualize grouped metrics from the MetricFrame is to take advantage of the inherent plotting capabilities of pandas.DataFrame:
 ```python
 ## by group: Return the collection of metrics evaluated for each subgroup in dataframe format
@@ -134,7 +134,7 @@ mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive
 
  ## 4 Mitigation
  
- #### 4.1 pre-processing
+ #### 4.1 Pre-Processing
 CorrelationRemover applies a linear transformation to the non-sensitive feature columns in order to remove their correlation with the sensitive feature columns while retaining as much information as possible (as measured by the least-squares error).
  ```python
 from fairlearn.preprocessing import CorrelationRemover
@@ -146,7 +146,7 @@ cf.fit(X)
 cf.transform(X)
  ```
  
- #### 4.2 post-processing
+ #### 4.2 Post-Processing
 The predictor’s output is adjusted to fulfill specified parity constraints. The postprocessors learn how to adjust the predictor’s output from the training data.
 
 #### 4.21 ThresholdOptimizer
@@ -177,7 +177,16 @@ from fairlearn.postprocessing import ThresholdOptimizer
 ## 5 Functions in other version
 #### 5.1 Dashboard
 ```python
-pip install fairlearn==0.6.2
+pip install fairlearn==0.5.0
 from fairlearn.widget import FairlearnDashboard
+# A_test containts your sensitive features (e.g., age, binary gender)
+# sensitive_feature_names contains your sensitive feature names
+# y_true contains ground truth labels
+# y_pred contains prediction labels
+
+FairlearnDashboard(sensitive_features=A_test,
+                   sensitive_feature_names=['BinaryGender', 'Age'],
+                   y_true=Y_test.tolist(),
+                   y_pred=[y_pred.tolist()])
 ```
 
