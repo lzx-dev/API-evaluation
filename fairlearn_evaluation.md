@@ -105,8 +105,16 @@ metric_frame = MetricFrame(metrics={"selection_rate": selection_rate,
 mf.overall
 mf.by_group
 ```
+```diff
+-Note: ValueError: Target is multiclass but average='binary'. Please choose another average setting, one of [None, 'micro', 'macro', 'weighted']. 
+will raise if y is a multiclass target
+
+```
+
 Note: metrics (callable or dict): <br>
 The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
+
+
 
 #### 3.2.1 MetricFrame Visualization
 The simplest way to visualize grouped metrics from the MetricFrame is to take advantage of the inherent plotting capabilities of pandas.DataFrame:
