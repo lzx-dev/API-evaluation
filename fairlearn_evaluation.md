@@ -108,7 +108,7 @@ mf.by_group
 Note: metrics (callable or dict): <br>
 The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
 
-#### 3.2.1 Metric Frame Visualization
+#### 3.2.1 MetricFrame Visualization
 The simplest way to visualize grouped metrics from the MetricFrame is to take advantage of the inherent plotting capabilities of pandas.DataFrame:
 ```python
 ## by group: Return the collection of metrics evaluated for each subgroup in dataframe format
@@ -121,6 +121,15 @@ metric_frame.by_group.plot.bar(
     title="Show all metrics",
 )
 ```
+#### 3.2.2 Derived Metric
+To generate scalar-producing metric functions based on the aggregation methods mentioned above (MetricFrame.group_min(), MetricFrame.group_max(), MetricFrame.difference(), and MetricFrame.ratio()). 
+```python
+from fairlearn.metrics import make_derived_metric
+from fiarlearn.metrics import selection_rate
+sr = make_derived_metric(metric=selection_rate, transform='difference')
+sr(y_true, y_pred, sensitive_features=A)
+```
+
 #### 3.3 Using existing metric definitions from scikit-learn
 ```python
 from sklearn.metrics import accuracy_score
@@ -176,6 +185,7 @@ from fairlearn.postprocessing import ThresholdOptimizer
  
 ## 5 Functions in other version
 #### 5.1 Dashboard
+The Fairlearn dashboard was a Jupyter notebook widget for assessing how a model’s predictions impact different groups (e.g., different ethnicities), and also for comparing multiple models along different fairness and performance metrics.
 ```python
 pip install fairlearn==0.5.0
 from fairlearn.widget import FairlearnDashboard
@@ -188,5 +198,10 @@ FairlearnDashboard(sensitive_features=A_test,
                    sensitive_feature_names=['BinaryGender', 'Age'],
                    y_true=Y_test.tolist(),
                    y_pred=[y_pred.tolist()])
+```
+
+```diff
+-Note: The FairlearnDashboard will move from Fairlearn to the raiwidgets package after the v0.5.0 release.
+
 ```
 
