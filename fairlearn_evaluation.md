@@ -130,6 +130,17 @@ sr = make_derived_metric(metric=selection_rate, transform='difference')
 sr(y_true, y_pred, sensitive_features=A)
 ```
 
+#### 3.2.3 Control Features
+Control features are useful for cases where there is some expected variation with a feature, so we need to compute disparities while controlling for that feature.
+```python
+cf_metric = MetricFrame(metrics= defined metric,
+                             y_true=y_true,
+                             y_pred=y_pred,
+                             sensitive_features=A,
+                         control_features= control_feature)
+```
+
+
 #### 3.3 Using existing metric definitions from scikit-learn
 ```python
 from sklearn.metrics import accuracy_score
