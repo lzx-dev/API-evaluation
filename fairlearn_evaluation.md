@@ -168,6 +168,8 @@ will raise when apply multiclass target on sklearn.metrics like recall_score.
 ```
 
 #### 3.4 Evaluation
+MetricFrame is a convient tool to provide users insight on difference between each sensitive groups with inherent plotting capabilities of pandas.DataFrame. It also provides functions to recover the maximum and minimum values of the metric across groups and the difference and ratio between the maximum and minimum.  <br>
+However, MetricFrame class did not clarify that metrics like demographic_parity_difference, which measures the difference between groups, can not be added to the frame. Another shortage is that it requires the use of functools.partial() to prebind the required arguments(besides y true and y predict)to the metric function.
 
 
  ## 4 Mitigation
@@ -211,6 +213,8 @@ from fairlearn.postprocessing import ThresholdOptimizer
  dp.gamma(lambda X: y_pred)
  ```
  
+ #### 4.4 Evaluation
+ 
 ## 5 Functions in other version
 #### 5.1 Dashboard
 The Fairlearn dashboard was a Jupyter notebook widget for assessing how a model’s predictions impact different groups (e.g., different ethnicities), and also for comparing multiple models along different fairness and performance metrics.
@@ -232,4 +236,6 @@ FairlearnDashboard(sensitive_features=A_test,
 -Note: The FairlearnDashboard will move from Fairlearn to the raiwidgets package after the v0.5.0 release.
 
 ```
+
+#### 5.2 Evaluation
 
