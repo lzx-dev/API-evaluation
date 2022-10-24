@@ -23,7 +23,7 @@ pip install -e .
 Note: Fairlearn is subject to change, so notebooks downloaded from main may not be compatible with Fairlearn installed with pip.
 
 ## 2 Dataset
-#### 2.1 Datasets Provided Out Of The Box by AIF360
+#### 2.1 Datasets Provided Out Of The Box by Fairlearn
 This module contains datasets that can be used for benchmarking and education.
 ```python
 # UCI Adult dataset (binary classification)
@@ -55,7 +55,7 @@ x, y = data_2
 
 ## if as_frame is False, return type change from pandas.DataFrame to numpy.ndarray
 ```
-#### 2.2 Output of data.DESCR
+#### 2.2 Output Of Data.DESCR
 ```**Author**: Ronny Kohavi and Barry Becker  
 **Source**: [UCI](https://archive.ics.uci.edu/ml/datasets/Adult) - 1996  
 **Please cite**: Ron Kohavi, "Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid", Proceedings of the Second International Conference on Knowledge Discovery and Data Mining, 1996  
@@ -85,7 +85,7 @@ The document of each dataset gives users very detailed context information, like
 The output type is flexible.  After users import the dataset and initialize it, the return type can be a bunch object containing data, target, feature names, and description of the data; it can also be simply x and y in Dataframe type or ndarray type.
 
 ## 3 Metric
-#### 3.1 Fairlearn metric
+#### 3.1 Fairlearn Metric
 ```python
 from fairlearn.metrics import (selection_rate, demographic_parity_difference, demographic_parity_ratio,
                               false_positive_rate, false_negative_rate,
@@ -97,8 +97,8 @@ demographic_parity_ratio(y_true, y_pred, sensitive_features = X_test["sens_attr_
 selection_rate(y_true=y_true, y_pred=y_pred)
 ```
 
-
 #### 3.2 MetricFrame
+This data structure stores and manipulates disaggregated values for any number of underlying metrics. At least one sensitive feature must be supplied, which is used to split the data into subgroups. 
 ```python
 from fairlearn.metrics import MetricFrame
 from fiarlearn.metrics import selection_rate, count
@@ -114,15 +114,9 @@ metric_frame = MetricFrame(metrics={"selection_rate": selection_rate,
 mf.overall
 mf.by_group
 ```
-```diff
--Note: ValueError: Target is multiclass but average='binary'. Please choose another average setting, one of [None, 'micro', 'macro', 'weighted']. 
-will raise if y is a multiclass target
 
-```
-
-Note: metrics (callable or dict): <br>
+Note: metrics in metricframe(callable or dict): <br>
 The underlying metric functions which are to be calculated. This can either be a single metric function or a dictionary of functions. These functions must be callable as fn(y_true, y_pred, **sample_params). If there are any other arguments required (such as beta for sklearn.metrics.fbeta_score()) then functools.partial() must be used.
-
 
 
 #### 3.2.1 MetricFrame Visualization
@@ -158,7 +152,7 @@ cf_metric = MetricFrame(metrics= defined metric,
 ```
 
 
-#### 3.3 Using existing metric definitions from scikit-learn
+#### 3.3 Using Existing Metric Definitions From scikit-learn
 ```python
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
@@ -166,11 +160,17 @@ classifier = DecisionTreeClassifier(min_samples_leaf=10, max_depth=4)
 classifier.fit(X, y_true)
 y_pred = classifier.predict(X)
 mf = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features= x_test["ensitive_features_name"])
+```
+```diff
+-Note: ValueError: Target is multiclass but average='binary'. Please choose another average setting, one of [None, 'micro', 'macro', 'weighted']. 
+will raise when apply multiclass target on sklearn.metrics like recall_score.
 
 ```
 
+#### 3.4 Evaluation
+
+
  ## 4 Mitigation
- 
  #### 4.1 Pre-Processing
 CorrelationRemover applies a linear transformation to the non-sensitive feature columns in order to remove their correlation with the sensitive feature columns while retaining as much information as possible (as measured by the least-squares error).
  ```python
