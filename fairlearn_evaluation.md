@@ -214,6 +214,7 @@ from fairlearn.postprocessing import ThresholdOptimizer
  ```
  
  #### 4.4 Evaluation
+Document of each algorithm clarifies the task type(binary classification, regression) and supported fairness definitions(demographic parity, equalized odds, etc.). The type requirement of parameters x and y is flexible: X can be numpy.ndarray, or pandas.DataFrame. y can be numpy.ndarray, pandas.DataFrame, pandas.Series, or list.
  
 ## 5 Functions in other version
 #### 5.1 Dashboard
