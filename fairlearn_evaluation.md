@@ -1,6 +1,6 @@
 # Python Library Evaluation: Fairlearn
 
-Fairlearn is an open-source, community-driven project to help data scientists improve fairness of AI systems. The project includes a Python library for fairness assessment and improvement (fairness metrics, mitigation algorithms, plotting, etc.) and educational resources covering organizational and technical processes for unfairness mitigation (comprehensive user guide, detailed case studies, Jupyter notebooks, white papers, etc.)
+Fairlearn is an open-source, community-driven project to help data scientists improve fairness of AI systems. The project includes a Python library for fairness assessment and improvement (fairness metrics, mitigation algorithms, plotting, etc.) and educational resources covering organizational and technical processes for unfairness mitigation (comprehensive user guide, detailed case studies, Jupyter notebooks, white papers).
 
 This report will go through the Fairlearn setup, dataset, metric, Mitigation algorithm, reduction algorithm, and functions in other versions and give suggestions from a user's perspective.
 
@@ -23,6 +23,7 @@ pip install -e .
 Note: Fairlearn is subject to change, so notebooks downloaded from main may not be compatible with Fairlearn installed with pip.
 
 ## 2 Dataset
+#### 2.1 Datasets Provided Out Of The Box by AIF360
 This module contains datasets that can be used for benchmarking and education.
 ```python
 # UCI Adult dataset (binary classification)
@@ -54,7 +55,7 @@ x, y = data_2
 
 ## if as_frame is False, return type change from pandas.DataFrame to numpy.ndarray
 ```
-Output for data.DESCR
+#### 2.2 Output of data.DESCR
 ```**Author**: Ronny Kohavi and Barry Becker  
 **Source**: [UCI](https://archive.ics.uci.edu/ml/datasets/Adult) - 1996  
 **Please cite**: Ron Kohavi, "Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid", Proceedings of the Second International Conference on Knowledge Discovery and Data Mining, 1996  
@@ -77,6 +78,11 @@ Ronny Kohavi and Barry Becker. Data Mining and Visualization, Silicon Graphics.
 e-mail: ronnyk '@' live.com for questions.
 Downloaded from openml.org.
 ``` 
+
+#### 2.3 Evaluation
+The document of each dataset gives users very detailed context information, like the source of the data and the definition of each attribute. It also clarifies the appropriate tasks(binary classification or regression, how to treat the target variable, which columns caused fairness problems) that should be applied
+
+The output type is flexible.  After users import the dataset and initialize it, the return type can be a bunch object containing data, target, feature names, and description of the data; it can also be simply x and y in Dataframe type or ndarray type.
 
 ## 3 Metric
 #### 3.1 Fairlearn metric
