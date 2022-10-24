@@ -1,5 +1,8 @@
 # Python Library Evaluation: Fairlearn
 
+Fairlearn is an open-source, community-driven project to help data scientists improve fairness of AI systems. The project includes a Python library for fairness assessment and improvement (fairness metrics, mitigation algorithms, plotting, etc.) and educational resources covering organizational and technical processes for unfairness mitigation (comprehensive user guide, detailed case studies, Jupyter notebooks, white papers, etc.)
+
+This report will go through the Fairlearn setup, dataset, metric, Mitigation algorithm, reduction algorithm, and functions in other versions and give suggestions from a user's perspective.
 
 
 ## 1 Setup
@@ -75,7 +78,7 @@ e-mail: ronnyk '@' live.com for questions.
 Downloaded from openml.org.
 ``` 
 
-## 3 Metrics
+## 3 Metric
 #### 3.1 Fairlearn metric
 ```python
 from fairlearn.metrics import (selection_rate, demographic_parity_difference, demographic_parity_ratio,
