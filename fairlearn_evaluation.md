@@ -239,4 +239,4 @@ FairlearnDashboard(sensitive_features=A_test,
 ```
 
 #### 5.2 Evaluation
-
+The Fairlearn dashboard provides a visual way to compare metrics between models as well as compare metrics for different groups on a single model. However, it can only be displayed on Jupyter notebook. 
