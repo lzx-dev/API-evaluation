@@ -80,7 +80,7 @@ Downloaded from openml.org.
 ``` 
 
 #### 2.3 Evaluation
-The document of each dataset gives users very detailed context information, like the source of the data and the definition of each attribute. It also clarifies the appropriate tasks(binary classification or regression, how to treat the target variable, which columns caused fairness problems) that should be applied
+The document of each dataset gives users very detailed context information, like the source of the data and the definition of each attribute. It also clarifies the appropriate tasks(binary classification or regression, how to treat the target variable, which columns caused fairness problems) that should be applied.
 
 The output type is flexible.  After users import the dataset and initialize it, the return type can be a bunch object containing data, target, feature names, and description of the data; it can also be simply x and y in Dataframe type or ndarray type.
 
@@ -214,7 +214,7 @@ from fairlearn.postprocessing import ThresholdOptimizer
  ```
  
  #### 4.4 Evaluation
-Document of each algorithm clarifies the task type(binary classification, regression) and supported fairness definitions(demographic parity, equalized odds, etc.). The type requirement of parameters x and y is flexible: X can be numpy.ndarray, or pandas.DataFrame. y can be numpy.ndarray, pandas.DataFrame, pandas.Series, or list.
+Document of each algorithm clarifies the task type(binary classification, regression) and supported fairness definitions(demographic parity, equalized odds, etc.). The type requirement of parameters x and y is flexible: X can be numpy.ndarray, or pandas.DataFrame. y can be numpy.ndarray, pandas.DataFrame, pandas.Series, or list. 
  
 ## 5 Functions in other version
 #### 5.1 Dashboard
