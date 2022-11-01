@@ -6,13 +6,23 @@ Lens has very frequent updates, and the API strucute and usage changed a lot dur
 
 
 ## 2.Metric
-#### out-of-the-box Matrix
+#### 2.1 Out-of-the-box Matrix
 Many metrics are supported out-of-the-box. These metrics can be referenced by string.
 ```python
 from credoai.modules import list_metrics
 metrics = list_metrics()
 ```
 <img width="579" alt="Screenshot 2022-10-31 at 9 16 25 PM" src="https://user-images.githubusercontent.com/75053989/199137698-e67fe9ec-4c99-432d-84ae-f09dca114817.png">
+
+#### 2.2 Custom Metrics
+```python
+from credoai.modules import Metric
+Metric(name = 'metric',
+       metric_category = "binary_classification",
+       fun = fun)
+#fun (callable, optional) – The function definition of the metric. 
+#If none, the metric cannot be used and is only defined for documentation purposes
+```
 
 ## 3. Assessment
 Perform specific evaluations on model and/or dataset.
