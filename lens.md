@@ -1,6 +1,6 @@
 # Python Library Evaluation: Credo Lens
 
-## 1.Version
+## 1.Version 1.1.0
 The newest version was released on Oct 28, 2022, supports python version 3.8+.   <br>
 Lens has very frequent updates, and the API strucute and usage changed a lot during these updates. 
 
@@ -24,8 +24,8 @@ Metric(name = 'metric',
 #If none, the metric cannot be used and is only defined for documentation purposes
 ```
 
-## 3.Assessment
-Perform specific evaluations on model and/or dataset.
+## 3.Evaluators
+Evaluators are the classes that perform specific functions on a model and/or data. These can include assessing the model for fairness, or profiling a data. Evaluators are constantly being added to the framework, which creates Lens’s standard library.
 ```python
 from credoai.evaluators import ModelFairness, Performance
 metrics = ['precision_score', 'recall_score', 'equal_opportunity']
@@ -33,7 +33,7 @@ ModelFairness(metrics=metrics)
 erformance(metrics=metrics
 ```
 
-## 4.Model
+## 4.Model&Data
 #### 4.1 Classification Model
 ClassificationModel serves as an adapter between arbitrary binary or multi-class classification models and the evaluations in Lens.
 ```python
@@ -41,6 +41,18 @@ from sklearn.ensemble import RandomForestClassifier
 model = RandomForestClassifier(random_state=42)
 model.fit(X_train, y_train)
 credo_model = ClassificationModel(model_like=model)
+```
+
+#### 4.2 Tabular Data
+Data type artifact, like TabularData serve as adapters between datasets and the evaluators in Lens. 
+When you pass data to a Data artifact, the artifact performs various steps of validation, and formats them so that they can be used by evaluators. The aim of this procedure is to preempt errors down the line.
+```python
+credo_data = TabularData(
+    name="UCI-credit-default",
+    X=X_test,
+    y=y_test,
+    sensitive_features=sensitive_features_test,
+)
 ```
 
 ## 5.Lens
@@ -58,5 +70,9 @@ metrics = ['precision_score', 'recall_score', 'equal_opportunity']
 lens.add(ModelFairness(metrics=metrics))
 results = lens.get_results()
 ```
+<img width="443" alt="Screenshot 2022-11-01 at 9 46 56 AM" src="https://user-images.githubusercontent.com/75053989/199248370-7068387b-27ca-4917-89c3-a5c77cd609b0.png">
+
 
 ## 6.Credo AI Platform
+Connecting Lens to the Governance App requires that you have already defined a Use-Case and defined a policy pack defining how associated models and data should be assessed.
+
