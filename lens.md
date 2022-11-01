@@ -6,6 +6,7 @@ Lens has very frequent updates, and the API strucute and usage changed a lot dur
 
 
 ## 2.Metric
+#### out-of-the-box Matrix
 Many metrics are supported out-of-the-box. These metrics can be referenced by string.
 ```python
 from credoai.modules import list_metrics
