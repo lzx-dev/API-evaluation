@@ -24,7 +24,7 @@ Metric(name = 'metric',
 #If none, the metric cannot be used and is only defined for documentation purposes
 ```
 
-## 3.Evaluators
+## 3.Evaluator
 Evaluators are the classes that perform specific functions on a model and/or data. These can include assessing the model for fairness, or profiling a data. Evaluators are constantly being added to the framework, which creates Lens’s standard library.
 ```python
 from credoai.evaluators import ModelFairness, Performance
