@@ -24,7 +24,7 @@ Metric(name = 'metric',
 #If none, the metric cannot be used and is only defined for documentation purposes
 ```
 
-## 3. Assessment
+## 3.Assessment
 Perform specific evaluations on model and/or dataset.
 ```python
 from credoai.evaluators import ModelFairness, Performance
@@ -33,7 +33,7 @@ ModelFairness(metrics=metrics)
 erformance(metrics=metrics
 ```
 
-## 4. Model
+## 4.Model
 #### 4.1 Classification Model
 ClassificationModel serves as an adapter between arbitrary binary or multi-class classification models and the evaluations in Lens.
 ```python
@@ -43,7 +43,7 @@ model.fit(X_train, y_train)
 credo_model = ClassificationModel(model_like=model)
 ```
 
-## Lens
+## 5.Lens
 Lens is the principle interface to the Credo AI Lens assessment framework.
 ```python
 credo_model = ClassificationModel(name="credit_default_classifier", model_like=model)
@@ -59,3 +59,4 @@ lens.add(ModelFairness(metrics=metrics))
 results = lens.get_results()
 ```
 
+## 6.Credo AI Platform
