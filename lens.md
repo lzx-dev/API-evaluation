@@ -6,7 +6,7 @@ Lens has very frequent updates, and the API strucute and usage changed a lot dur
 
 
 ## 2.Metric
-#### 2.1 Out-of-the-box Matrix
+#### 2.1 Out-of-the-box Metrics
 Many metrics are supported out-of-the-box. These metrics can be referenced by string.
 ```python
 from credoai.modules import list_metrics
@@ -30,7 +30,7 @@ Evaluators are the classes that perform specific functions on a model and/or dat
 from credoai.evaluators import ModelFairness, Performance
 metrics = ['precision_score', 'recall_score', 'equal_opportunity']
 ModelFairness(metrics=metrics)
-erformance(metrics=metrics
+Performance(metrics=metrics
 ```
 
 ## 4.Model&Data
@@ -75,4 +75,14 @@ results = lens.get_results()
 
 ## 6.Credo AI Platform
 Connecting Lens to the Governance App requires that you have already defined a Use-Case and defined a policy pack defining how associated models and data should be assessed.
+```python
+from credoai.governance import Governance
+gov = Governance()
+url = 'your assessment url'
+gov.register(assessment_plan_url=url)
+lens.send_to_governance()
+#Export to platform
+gov.export()
+```
+
 
