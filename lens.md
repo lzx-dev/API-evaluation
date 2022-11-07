@@ -1,4 +1,5 @@
 # Python Library Evaluation: Credo Lens
+An open source Responsible AI Assessment Framework for Data Scientists to rapidly assess models and generate results for governance review within the Credo AI app.
 
 ## 1.Version 1.1.0
 The newest version was released on Oct 28, 2022, supports python version 3.8+.   <br>
@@ -85,4 +86,8 @@ lens.send_to_governance()
 gov.export()
 ```
 
+## 7.Evaluation
+When installing Lens with pip, it does not guarantee to provide the latest version. For example, the newest version is 1.1.0, but the version from the pip install only gives me 0.2.1 unless I specify the version I want. The structure and usage of the API changes a lot during updates and only the latest verion document is provided, which is not user-friendly since users with previos versions would encounter many errors if they use the current document as reference.
+
+Another problem is as a machine learning fairness-related API, it does not provide any mitigation algorithms and no visualization functions unless connected to the Credo Application platform
 
